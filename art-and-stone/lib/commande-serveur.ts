@@ -100,7 +100,9 @@ export function resumeCommande(commande: Commande, entete: string): string {
     return `  - ${l.nom} : ${formatNombre(l.quantite)} ${l.libelleUnite} × ${formatPrix(l.prixUnitaire)} = ${formatPrix(l.total)}${provisoire}${details}`;
   });
   const poids =
-    panier.poidsTotalKg === null ? "inconnu (au moins un poids non renseigné)" : `${formatNombre(panier.poidsTotalKg)} kg`;
+    panier.poidsTotalKg === null
+      ? "inconnu (au moins un poids non renseigné)"
+      : `${formatNombre(panier.poidsTotalKg)} kg`;
 
   return [
     entete,

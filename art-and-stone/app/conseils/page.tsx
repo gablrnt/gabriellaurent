@@ -35,10 +35,16 @@ export default function PageConseils() {
         fil={[{ label: "Conseils" }]}
       >
         <nav aria-label="Sommaire" className="mt-6 flex flex-wrap gap-3">
-          <a href="#pose" className="rounded-full border border-anthracite/70 px-4 py-2 text-sm hover:bg-anthracite hover:text-creme">
+          <a
+            href="#pose"
+            className="rounded-full border border-anthracite/70 px-4 py-2 text-sm hover:bg-anthracite hover:text-creme"
+          >
             La pose
           </a>
-          <a href="#entretien" className="rounded-full border border-anthracite/70 px-4 py-2 text-sm hover:bg-anthracite hover:text-creme">
+          <a
+            href="#entretien"
+            className="rounded-full border border-anthracite/70 px-4 py-2 text-sm hover:bg-anthracite hover:text-creme"
+          >
             L&apos;entretien
           </a>
         </nav>
@@ -80,9 +86,7 @@ export default function PageConseils() {
           <h2 id="titre-entretien" className="text-4xl sm:text-5xl">
             L&apos;entretien
           </h2>
-          <p className="mt-4 max-w-2xl leading-relaxed">
-            Une pierre bien protégée s&apos;entretient très simplement.
-          </p>
+          <p className="mt-4 max-w-2xl leading-relaxed">Une pierre bien protégée s&apos;entretient très simplement.</p>
           <ul className="mt-8 grid gap-4 md:grid-cols-2">
             <Conseil titre="Au quotidien : un savon doux">
               Nettoyez avec un savon doux au pH neutre, dilué dans l&apos;eau.
@@ -91,16 +95,29 @@ export default function PageConseils() {
               Pas de vinaigre, de détartrant ni de nettoyant acide sur la pierre naturelle.
             </Conseil>
             <Conseil titre="Protégez la pierre">
-              Appliquez <Link href="/produit/protect-pierre-base" className="text-terre-fonce underline underline-offset-4">Protect Pierre Base</Link>{" "}
+              Appliquez{" "}
+              <Link href="/produit/protect-pierre-base" className="text-terre-fonce underline underline-offset-4">
+                Protect Pierre Base
+              </Link>{" "}
               en première couche, puis{" "}
-              <Link href="/produit/protect-pierre-finish" className="text-terre-fonce underline underline-offset-4">Protect Pierre Finish</Link>{" "}
+              <Link href="/produit/protect-pierre-finish" className="text-terre-fonce underline underline-offset-4">
+                Protect Pierre Finish
+              </Link>{" "}
               en finition.
             </Conseil>
             <Conseil titre="Contre les mousses, en extérieur">
-              Utilisez <Link href="/produit/clean-pro" className="text-terre-fonce underline underline-offset-4">Clean Pro</Link>, notre nettoyant antimousse.
+              Utilisez{" "}
+              <Link href="/produit/clean-pro" className="text-terre-fonce underline underline-offset-4">
+                Clean Pro
+              </Link>
+              , notre nettoyant antimousse.
             </Conseil>
             <Conseil titre="Après le chantier">
-              Nettoyez en profondeur avec <Link href="/produit/decap-pro" className="text-terre-fonce underline underline-offset-4">Decap Pro</Link>.
+              Nettoyez en profondeur avec{" "}
+              <Link href="/produit/decap-pro" className="text-terre-fonce underline underline-offset-4">
+                Decap Pro
+              </Link>
+              .
             </Conseil>
           </ul>
           <p className="mt-8 leading-relaxed">

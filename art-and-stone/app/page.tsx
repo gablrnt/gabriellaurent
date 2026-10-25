@@ -58,7 +58,8 @@ const ETAPES: { icone: NomIcone; titre: string; texte: string }[] = [
   {
     icone: "calculette",
     titre: "Calculez votre surface, on ajoute la marge de coupe",
-    texte: "Saisissez vos m² ou vos mètres linéaires : le calculateur ajoute 10 % pour les coupes et arrondit pour vous.",
+    texte:
+      "Saisissez vos m² ou vos mètres linéaires : le calculateur ajoute 10 % pour les coupes et arrondit pour vous.",
   },
   {
     icone: "camion",
@@ -100,9 +101,7 @@ export default function Accueil() {
           className="absolute inset-0 -z-10 bg-gradient-to-t from-anthracite/85 via-anthracite/45 to-anthracite/15"
         />
         <div className="conteneur pt-24 pb-14 sm:pb-20">
-          <p className="text-xs font-semibold tracking-[0.2em] text-creme/90 uppercase">
-            Pierre naturelle · Provence
-          </p>
+          <p className="text-xs font-semibold tracking-[0.2em] text-creme/90 uppercase">Pierre naturelle · Provence</p>
           <h1 className="mt-4 max-w-3xl text-5xl text-white sm:text-6xl lg:text-7xl">
             La pierre naturelle, livrée chez vous
           </h1>
@@ -212,7 +211,10 @@ export default function Accueil() {
               Nos best-sellers
             </h2>
           </div>
-          <Link href="/pierres" className="inline-flex items-center gap-2 font-medium text-terre-fonce underline-offset-4 hover:underline">
+          <Link
+            href="/pierres"
+            className="inline-flex items-center gap-2 font-medium text-terre-fonce underline-offset-4 hover:underline"
+          >
             Toutes les pierres <Icone nom="fleche" className="size-4" />
           </Link>
         </Reveal>
@@ -273,7 +275,10 @@ export default function Accueil() {
       </section>
 
       {/* 7. Entreprise familiale */}
-      <section className="conteneur grid items-center gap-10 py-16 sm:py-24 lg:grid-cols-2 lg:gap-16" aria-labelledby="titre-famille">
+      <section
+        className="conteneur grid items-center gap-10 py-16 sm:py-24 lg:grid-cols-2 lg:gap-16"
+        aria-labelledby="titre-famille"
+      >
         <Reveal className="relative aspect-[4/3] overflow-hidden rounded-sm bg-greige/40">
           <ImagePierre
             src="https://artandstone.fr/images/equipe_stock_reel.webp"
@@ -293,8 +298,14 @@ export default function Accueil() {
           </p>
           <ul className="mt-6 space-y-4">
             {[
-              { icone: "entrepot" as const, texte: "Un stock physique à Tarascon : les pierres que vous commandez sont chez nous." },
-              { icone: "carriere" as const, texte: "Nous sélectionnons nous-mêmes les blocs, directement en carrière." },
+              {
+                icone: "entrepot" as const,
+                texte: "Un stock physique à Tarascon : les pierres que vous commandez sont chez nous.",
+              },
+              {
+                icone: "carriere" as const,
+                texte: "Nous sélectionnons nous-mêmes les blocs, directement en carrière.",
+              },
               { icone: "horloge" as const, texte: "Une question, un devis ? Nous vous répondons sous 24 h." },
             ].map((p) => (
               <li key={p.texte} className="flex gap-4">

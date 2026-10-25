@@ -133,8 +133,7 @@ export const FINITIONS: Record<Finition, { label: string; explication: string }>
   },
   "sablee-brossee": {
     label: "Sablée brossée",
-    explication:
-      "Surface légèrement texturée et douce au toucher, antidérapante, idéale en extérieur.",
+    explication: "Surface légèrement texturée et douce au toucher, antidérapante, idéale en extérieur.",
   },
   polie: {
     label: "Polie",
@@ -150,10 +149,7 @@ export const FINITIONS: Record<Finition, { label: string; explication: string }>
   },
 };
 
-export const UNITES: Record<
-  Unite,
-  { suffixe: string; libelle: string; quantite: string; saisie: string }
-> = {
+export const UNITES: Record<Unite, { suffixe: string; libelle: string; quantite: string; saisie: string }> = {
   m2: { suffixe: "/m²", libelle: "le m²", quantite: "m²", saisie: "Surface à couvrir" },
   ml: {
     suffixe: "/ml",
@@ -213,10 +209,7 @@ export const PRODUITS: Produit[] = [
     descriptionCourte:
       "Un dallage aux tons greige chaleureux, aux bords adoucis et à la surface patinée, qui donne au sol le charme d'une maison de famille provençale.",
     images: [
-      img(
-        "dallage_aurelia_greige_vieillie_cuisine.webp",
-        "Dallage Aurelia Greige Vieillie posé au sol d'une cuisine",
-      ),
+      img("dallage_aurelia_greige_vieillie_cuisine.webp", "Dallage Aurelia Greige Vieillie posé au sol d'une cuisine"),
     ],
     bestSeller: true,
   },
@@ -233,12 +226,7 @@ export const PRODUITS: Produit[] = [
     ...NON_RENSEIGNE,
     descriptionCourte:
       "Le greige lumineux de l'Aurelia dans une finition sablée brossée, douce au toucher, pensée pour les terrasses et les abords de piscine.",
-    images: [
-      img(
-        "dallage_aurelia_beige_sablee_brossee_pose.webp",
-        "Dallage Aurelia Greige Sablée Brossée posé",
-      ),
-    ],
+    images: [img("dallage_aurelia_beige_sablee_brossee_pose.webp", "Dallage Aurelia Greige Sablée Brossée posé")],
     bestSeller: true,
   },
   {
@@ -287,9 +275,7 @@ export const PRODUITS: Produit[] = [
     ...NON_RENSEIGNE,
     descriptionCourte:
       "Une pierre claire aux tons crème, à l'aspect ancien, qui apporte douceur et lumière aux pièces de vie.",
-    images: [
-      img("dallage_pierre_solene_vieillie_pose.webp", "Dallage Pierre de Solène Vieillie posé"),
-    ],
+    images: [img("dallage_pierre_solene_vieillie_pose.webp", "Dallage Pierre de Solène Vieillie posé")],
     bestSeller: false,
   },
   {
@@ -474,12 +460,7 @@ export const PRODUITS: Produit[] = [
     ...NON_RENSEIGNE,
     descriptionCourte:
       "De grandes pierres de pas japonais à poser dans la pelouse ou le gravier, pour tracer un chemin naturel à travers le jardin.",
-    images: [
-      img(
-        "pas_japonais_xl_aurelia_greige_authentique_1.webp",
-        "Pas japonais XL Aurelia Greige Authentique",
-      ),
-    ],
+    images: [img("pas_japonais_xl_aurelia_greige_authentique_1.webp", "Pas japonais XL Aurelia Greige Authentique")],
     bestSeller: false,
   },
   {
@@ -493,11 +474,8 @@ export const PRODUITS: Produit[] = [
     prix: 45,
     prixProvisoire: true,
     ...NON_RENSEIGNE,
-    descriptionCourte:
-      "Des pas japonais patinés aux bords adoucis, pour créer une allée de jardin au charme ancien.",
-    images: [
-      img("img_pas_japonais_aurelia_beige_vieillie.webp", "Pas japonais Aurelia Greige Vieillie"),
-    ],
+    descriptionCourte: "Des pas japonais patinés aux bords adoucis, pour créer une allée de jardin au charme ancien.",
+    images: [img("img_pas_japonais_aurelia_beige_vieillie.webp", "Pas japonais Aurelia Greige Vieillie")],
     bestSeller: false,
   },
   {
@@ -513,9 +491,7 @@ export const PRODUITS: Produit[] = [
     ...NON_RENSEIGNE,
     descriptionCourte:
       "Une couvertine en pierre pour coiffer murets et murs de clôture d'une belle finition naturelle.",
-    images: [
-      img("couvertine_aurelia_greige_vieillie_3.webp", "Couvertine Aurelia Greige Vieillie"),
-    ],
+    images: [img("couvertine_aurelia_greige_vieillie_3.webp", "Couvertine Aurelia Greige Vieillie")],
     bestSeller: false,
   },
 
@@ -534,9 +510,7 @@ export const PRODUITS: Produit[] = [
     ...NON_RENSEIGNE,
     descriptionCourte:
       "Un parement à la surface éclatée en relief, pour habiller façades et murs d'un caractère provençal.",
-    images: [
-      img("parement_rock_face_provencale_facade.webp", "Façade habillée de Parements Rock Face Provençale"),
-    ],
+    images: [img("parement_rock_face_provencale_facade.webp", "Façade habillée de Parements Rock Face Provençale")],
     bestSeller: false,
   },
   {
@@ -552,12 +526,7 @@ export const PRODUITS: Produit[] = [
     ...NON_RENSEIGNE,
     descriptionCourte:
       "De grands parements greige à la surface éclatée, pour des murs au relief naturel et contemporain.",
-    images: [
-      img(
-        "parement_aurelia_beige_grand_format_eclate_1.webp",
-        "Parements Aurelia Greige Grand Format Éclaté",
-      ),
-    ],
+    images: [img("parement_aurelia_beige_grand_format_eclate_1.webp", "Parements Aurelia Greige Grand Format Éclaté")],
     bestSeller: false,
   },
 
@@ -624,8 +593,7 @@ export const PRODUITS: Produit[] = [
     prix: 55,
     prixProvisoire: false,
     ...NON_RENSEIGNE,
-    descriptionCourte:
-      "Décapant pour un nettoyage intensif de la pierre, notamment après chantier. Bidon de 2 L.",
+    descriptionCourte: "Décapant pour un nettoyage intensif de la pierre, notamment après chantier. Bidon de 2 L.",
     images: [img("decap_pro_officiel.webp", "Bidon de décapant Decap Pro, 2 litres")],
     bestSeller: false,
     entretien: { contenanceL: 2, rendementM2ParL: 15 },

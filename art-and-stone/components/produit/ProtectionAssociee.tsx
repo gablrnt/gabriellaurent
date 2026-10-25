@@ -54,7 +54,13 @@ export function ProtectionAssociee({ produits }: { produits: Produit[] }) {
             <li key={p.slug} className="flex gap-4 rounded-sm border border-greige bg-blanc p-4">
               <div className="relative size-24 shrink-0 overflow-hidden rounded-sm bg-white sm:size-28">
                 {p.images[0] && (
-                  <ImagePierre src={p.images[0].url} alt={p.images[0].alt} fill sizes="112px" className="object-contain p-2" />
+                  <ImagePierre
+                    src={p.images[0].url}
+                    alt={p.images[0].alt}
+                    fill
+                    sizes="112px"
+                    className="object-contain p-2"
+                  />
                 )}
               </div>
               <div className="flex min-w-0 flex-1 flex-col">
@@ -100,8 +106,8 @@ export function ProtectionAssociee({ produits }: { produits: Produit[] }) {
         })}
       </ul>
       <p className="mt-4 text-sm text-taupe-fonce">
-        Estimation pour une couche, d&apos;après le rendement de chaque produit. Protect Pierre Base s&apos;applique
-        en première couche, Protect Pierre Finish en finition.
+        Estimation pour une couche, d&apos;après le rendement de chaque produit. Protect Pierre Base s&apos;applique en
+        première couche, Protect Pierre Finish en finition.
       </p>
     </div>
   );

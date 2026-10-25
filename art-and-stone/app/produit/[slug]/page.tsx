@@ -82,7 +82,11 @@ export default async function PageProduit({ params }: PageProps<"/produit/[slug]
           category: categorie.titre,
           brand: { "@type": "Brand", name: "ART & STONE" },
           ...(produit.finition
-            ? { additionalProperty: [{ "@type": "PropertyValue", name: "Finition", value: FINITIONS[produit.finition].label }] }
+            ? {
+                additionalProperty: [
+                  { "@type": "PropertyValue", name: "Finition", value: FINITIONS[produit.finition].label },
+                ],
+              }
             : {}),
           offers: {
             "@type": "Offer",
@@ -96,12 +100,7 @@ export default async function PageProduit({ params }: PageProps<"/produit/[slug]
       />
 
       <section className="conteneur pt-6 pb-12 sm:pt-8">
-        <FilAriane
-          etapes={[
-            { label: categorie.nom, href: `/${produit.categorie}` },
-            { label: produit.nom },
-          ]}
-        />
+        <FilAriane etapes={[{ label: categorie.nom, href: `/${produit.categorie}` }, { label: produit.nom }]} />
 
         <div className="mt-6 grid gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:gap-12">
           <div className="lg:sticky lg:top-28 lg:self-start">

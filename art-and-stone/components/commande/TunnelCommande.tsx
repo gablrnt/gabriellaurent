@@ -258,8 +258,8 @@ export function TunnelCommande({ paiementEnLigne }: { paiementEnLigne: boolean }
               <div className="sm:col-span-2">
                 <p className="mb-4 flex gap-2 rounded-sm bg-sable px-4 py-3 text-sm">
                   <Icone nom="info" className="size-5 shrink-0 text-terre-fonce" />
-                  Devis de livraison sous 24 h : vous pouvez envoyer votre commande, nous vous recontactons avec le
-                  prix de la livraison avant tout paiement.
+                  Devis de livraison sous 24 h : vous pouvez envoyer votre commande, nous vous recontactons avec le prix
+                  de la livraison avant tout paiement.
                 </p>
                 <Champ
                   label="Pays"
@@ -389,7 +389,11 @@ export function TunnelCommande({ paiementEnLigne }: { paiementEnLigne: boolean }
               <div className="rounded-sm border border-greige bg-blanc p-4 text-sm">
                 <p className="mb-2 flex items-center justify-between font-semibold">
                   Coordonnées
-                  <button type="button" onClick={() => setEtape(0)} className="text-terre-fonce underline underline-offset-4">
+                  <button
+                    type="button"
+                    onClick={() => setEtape(0)}
+                    className="text-terre-fonce underline underline-offset-4"
+                  >
                     Modifier<span className="sr-only"> les coordonnées</span>
                   </button>
                 </p>
@@ -402,7 +406,11 @@ export function TunnelCommande({ paiementEnLigne }: { paiementEnLigne: boolean }
               <div className="rounded-sm border border-greige bg-blanc p-4 text-sm">
                 <p className="mb-2 flex items-center justify-between font-semibold">
                   Adresse
-                  <button type="button" onClick={() => setEtape(1)} className="text-terre-fonce underline underline-offset-4">
+                  <button
+                    type="button"
+                    onClick={() => setEtape(1)}
+                    className="text-terre-fonce underline underline-offset-4"
+                  >
                     Modifier<span className="sr-only"> l&apos;adresse</span>
                   </button>
                 </p>
@@ -419,7 +427,11 @@ export function TunnelCommande({ paiementEnLigne }: { paiementEnLigne: boolean }
               <div className="rounded-sm border border-greige bg-blanc p-4 text-sm">
                 <p className="mb-2 flex items-center justify-between font-semibold">
                   Livraison
-                  <button type="button" onClick={() => setEtape(2)} className="text-terre-fonce underline underline-offset-4">
+                  <button
+                    type="button"
+                    onClick={() => setEtape(2)}
+                    className="text-terre-fonce underline underline-offset-4"
+                  >
                     Modifier<span className="sr-only"> le mode de livraison</span>
                   </button>
                 </p>

@@ -14,9 +14,7 @@ export default function PageConfidentialite() {
       <p>Dernière mise à jour : [date].</p>
 
       <h2>Responsable du traitement</h2>
-      <p>
-        [Raison sociale], [adresse complète] — Téléphone : {SITE.telephone} — E-mail : [adresse e-mail].
-      </p>
+      <p>[Raison sociale], [adresse complète] — Téléphone : {SITE.telephone} — E-mail : [adresse e-mail].</p>
 
       <h2>Données collectées</h2>
       <ul>
@@ -43,8 +41,8 @@ export default function PageConfidentialite() {
       <h2>Destinataires</h2>
       <p>
         Vos données sont destinées à ART &amp; STONE et, pour les besoins strictement nécessaires, à ses prestataires :
-        hébergement du site [nom de l&apos;hébergeur], envoi des e-mails (Resend), paiement (Stripe) et transporteurs pour
-        la livraison. [À compléter et vérifier les transferts hors Union européenne.]
+        hébergement du site [nom de l&apos;hébergeur], envoi des e-mails (Resend), paiement (Stripe) et transporteurs
+        pour la livraison. [À compléter et vérifier les transferts hors Union européenne.]
       </p>
 
       <h2>Durée de conservation</h2>
@@ -57,15 +55,15 @@ export default function PageConfidentialite() {
       <p>
         Le contenu de votre panier est enregistré uniquement dans votre navigateur (stockage local), pour que vous le
         retrouviez à votre prochaine visite. Le site n&apos;utilise pas de cookie publicitaire ni de mesure
-        d&apos;audience. Lors d&apos;un paiement, Stripe peut déposer ses propres cookies, nécessaires à la sécurité de la
-        transaction. [À mettre à jour si un outil de mesure d&apos;audience est ajouté.]
+        d&apos;audience. Lors d&apos;un paiement, Stripe peut déposer ses propres cookies, nécessaires à la sécurité de
+        la transaction. [À mettre à jour si un outil de mesure d&apos;audience est ajouté.]
       </p>
 
       <h2>Vos droits</h2>
       <p>
-        Vous disposez d&apos;un droit d&apos;accès, de rectification, d&apos;effacement, d&apos;opposition, de limitation et
-        de portabilité de vos données. Pour l&apos;exercer, écrivez-nous à [adresse e-mail]. Vous pouvez également
-        adresser une réclamation à la CNIL (www.cnil.fr).
+        Vous disposez d&apos;un droit d&apos;accès, de rectification, d&apos;effacement, d&apos;opposition, de
+        limitation et de portabilité de vos données. Pour l&apos;exercer, écrivez-nous à [adresse e-mail]. Vous pouvez
+        également adresser une réclamation à la CNIL (www.cnil.fr).
       </p>
     </PageJuridique>
   );

@@ -38,8 +38,7 @@ export const REALISATIONS: Realisation[] = [
   {
     slug: "opus-incertum-interieur-terrasse",
     titre: "Opus incertum, de l'intérieur à la terrasse",
-    description:
-      "Aurelia Greige Opus Incertum brossé posé en continu entre l'intérieur et la terrasse.",
+    description: "Aurelia Greige Opus Incertum brossé posé en continu entre l'intérieur et la terrasse.",
     image: {
       url: "https://artandstone.fr/images/realisation_aurelia_greige_opus_incertum_brosse_interieur.webp",
       alt: "Sol intérieur en dallage Aurelia Greige Opus Incertum brossé",

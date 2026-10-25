@@ -142,9 +142,7 @@ export function SelecteurEchantillons({ pierres }: { pierres: Produit[] }) {
         </Bouton>
         <div aria-live="polite">
           {message && (
-            <p
-              className={`mt-3 text-sm font-medium ${message.type === "ok" ? "text-succes" : "text-erreur"}`}
-            >
+            <p className={`mt-3 text-sm font-medium ${message.type === "ok" ? "text-succes" : "text-erreur"}`}>
               {message.texte}{" "}
               {message.type === "ok" && (
                 <Link href="/panier" className="text-anthracite underline underline-offset-4">

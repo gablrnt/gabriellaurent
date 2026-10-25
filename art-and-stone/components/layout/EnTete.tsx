@@ -15,9 +15,7 @@ function estActif(pathname: string, href: string) {
 function BoutonPanier() {
   const { nombreArticles, pret } = usePanier();
   const libelle =
-    pret && nombreArticles > 0
-      ? `Panier, ${nombreArticles} article${nombreArticles > 1 ? "s" : ""}`
-      : "Panier, vide";
+    pret && nombreArticles > 0 ? `Panier, ${nombreArticles} article${nombreArticles > 1 ? "s" : ""}` : "Panier, vide";
   return (
     <Link
       href="/panier"

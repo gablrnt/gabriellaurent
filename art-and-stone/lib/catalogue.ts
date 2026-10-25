@@ -54,9 +54,7 @@ const VALEURS = {
 /** Lit les filtres depuis l'URL (?usage=interieur,terrasse&teinte=greige) en ignorant les valeurs inconnues */
 export function lireFiltres(params: { get(nom: string): string | null }): Filtres {
   const lire = <T extends string>(nom: keyof Filtres, valides: T[]): T[] =>
-    (params.get(nom) ?? "")
-      .split(",")
-      .filter((v): v is T => (valides as string[]).includes(v));
+    (params.get(nom) ?? "").split(",").filter((v): v is T => (valides as string[]).includes(v));
   return {
     usage: lire("usage", VALEURS.usage),
     teinte: lire("teinte", VALEURS.teinte),
@@ -70,8 +68,7 @@ export function filtrerProduits(produits: Produit[], filtres: Filtres): Produit[
     (p) =>
       (filtres.usage.length === 0 || filtres.usage.some((u) => p.usages.includes(u))) &&
       (filtres.teinte.length === 0 || (p.teinte !== null && filtres.teinte.includes(p.teinte))) &&
-      (filtres.finition.length === 0 ||
-        (p.finition !== null && filtres.finition.includes(p.finition))),
+      (filtres.finition.length === 0 || (p.finition !== null && filtres.finition.includes(p.finition))),
   );
 }
 

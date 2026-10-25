@@ -2,13 +2,7 @@
 
 import { createContext, useCallback, useContext, useMemo, useSyncExternalStore } from "react";
 import type { ProfilNez } from "@/data/produits";
-import {
-  QUANTITE_MAX,
-  idLigneEchantillons,
-  idLigneProduit,
-  nettoyerLignes,
-  type LignePanier,
-} from "@/lib/commande";
+import { QUANTITE_MAX, idLigneEchantillons, idLigneProduit, nettoyerLignes, type LignePanier } from "@/lib/commande";
 
 /**
  * Panier côté client : React context + localStorage.
@@ -99,10 +93,7 @@ export function PanierProvider({ children }: { children: React.ReactNode }) {
           l.id === id ? { ...l, quantite: Math.min(QUANTITE_MAX, l.quantite + quantite) } : l,
         );
       }
-      return [
-        ...actuelles,
-        { type: "produit", id, slug, quantite, ...(profilNez ? { profilNez } : {}) },
-      ];
+      return [...actuelles, { type: "produit", id, slug, quantite, ...(profilNez ? { profilNez } : {}) }];
     });
   }, []);
 
@@ -110,9 +101,7 @@ export function PanierProvider({ children }: { children: React.ReactNode }) {
     const id = idLigneEchantillons(pierres);
     modifier((actuelles) => {
       if (actuelles.some((l) => l.id === id)) {
-        return actuelles.map((l) =>
-          l.id === id ? { ...l, quantite: Math.min(QUANTITE_MAX, l.quantite + 1) } : l,
-        );
+        return actuelles.map((l) => (l.id === id ? { ...l, quantite: Math.min(QUANTITE_MAX, l.quantite + 1) } : l));
       }
       return [...actuelles, { type: "echantillons", id, pierres: [...pierres], quantite: 1 }];
     });

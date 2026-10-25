@@ -30,22 +30,19 @@ export async function POST(requete: Request) {
     });
   } catch (erreur) {
     console.error("[commande] échec de l'envoi :", erreur);
-    return reponseErreur(
-      "Votre commande n'a pas pu être transmise. Réessayez dans un instant ou appelez-nous.",
-      502,
-    );
+    return reponseErreur("Votre commande n'a pas pu être transmise. Réessayez dans un instant ou appelez-nous.", 502);
   }
 
   // Accusé de réception au client (non bloquant)
   if (process.env.RESEND_API_KEY) {
     after(() =>
       envoyerEmail({
-      a: commande.coordonnees.email,
-      sujet: `ART & STONE — Nous avons bien reçu votre commande ${commande.reference}`,
-      texte: resumeCommande(
-        commande,
-        `Bonjour ${commande.coordonnees.prenom},\n\nMerci pour votre commande. Nous vous recontactons sous 24 h pour valider la livraison et le paiement.\nAucun paiement n'a été effectué à ce stade.`,
-      ),
+        a: commande.coordonnees.email,
+        sujet: `ART & STONE — Nous avons bien reçu votre commande ${commande.reference}`,
+        texte: resumeCommande(
+          commande,
+          `Bonjour ${commande.coordonnees.prenom},\n\nMerci pour votre commande. Nous vous recontactons sous 24 h pour valider la livraison et le paiement.\nAucun paiement n'a été effectué à ce stade.`,
+        ),
       }).catch((erreur) => console.error("[commande] accusé de réception non envoyé :", erreur)),
     );
   }

@@ -34,8 +34,8 @@ export default function PageMentionsLegales() {
 
       <h2>Propriété intellectuelle</h2>
       <p>
-        L&apos;ensemble des contenus de ce site (textes, photographies, logos, mise en page) est la propriété
-        d&apos;ART &amp; STONE ou de ses partenaires. Toute reproduction sans autorisation écrite préalable est interdite.
+        L&apos;ensemble des contenus de ce site (textes, photographies, logos, mise en page) est la propriété d&apos;ART
+        &amp; STONE ou de ses partenaires. Toute reproduction sans autorisation écrite préalable est interdite.
       </p>
 
       <h2>Crédits photos</h2>

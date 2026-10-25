@@ -10,8 +10,7 @@ const BASE =
 const VARIANTES: Record<Variante, string> = {
   // Texte blanc sur terre cuite : contraste 4,6:1 (AA)
   primaire: "bg-terre text-white hover:bg-terre-fonce shadow-sm",
-  secondaire:
-    "border border-anthracite/80 text-anthracite bg-transparent hover:bg-anthracite hover:text-creme",
+  secondaire: "border border-anthracite/80 text-anthracite bg-transparent hover:bg-anthracite hover:text-creme",
   clair: "bg-creme text-anthracite hover:bg-white",
   lien: "text-terre-fonce underline underline-offset-4 hover:text-anthracite px-0 py-0",
 };

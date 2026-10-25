@@ -117,7 +117,10 @@ export function ContenuPanier() {
         </Link>
       </section>
 
-      <aside className="rounded-sm border border-greige bg-blanc p-5 sm:p-6 lg:sticky lg:top-28" aria-label="Récapitulatif">
+      <aside
+        className="rounded-sm border border-greige bg-blanc p-5 sm:p-6 lg:sticky lg:top-28"
+        aria-label="Récapitulatif"
+      >
         <h2 className="font-serif text-2xl">Récapitulatif</h2>
         <dl className="mt-5 space-y-3 text-sm">
           <div className="flex justify-between gap-4">
@@ -150,8 +153,8 @@ export function ContenuPanier() {
           {contientEchantillons && (
             <li className="flex gap-2">
               <Icone nom="echantillons" className="size-4 shrink-0" />
-              Le kit d&apos;échantillons ({formatPrix(KIT_ECHANTILLONS.prix)}) vous est remboursé en bon d&apos;achat sur
-              votre commande de pierres.
+              Le kit d&apos;échantillons ({formatPrix(KIT_ECHANTILLONS.prix)}) vous est remboursé en bon d&apos;achat
+              sur votre commande de pierres.
             </li>
           )}
           <li className="flex gap-2">

@@ -17,7 +17,10 @@ export const metadata: Metadata = {
 const ETAPES: { icone: NomIcone; texte: string }[] = [
   { icone: "echantillons", texte: "Cochez 3 pierres qui vous plaisent" },
   { icone: "camion", texte: "Recevez vos échantillons chez vous" },
-  { icone: "coche", texte: `Vos ${formatPrix(KIT_ECHANTILLONS.prix)} sont remboursés en bon d'achat sur votre commande` },
+  {
+    icone: "coche",
+    texte: `Vos ${formatPrix(KIT_ECHANTILLONS.prix)} sont remboursés en bon d'achat sur votre commande`,
+  },
 ];
 
 export default function PageEchantillons() {

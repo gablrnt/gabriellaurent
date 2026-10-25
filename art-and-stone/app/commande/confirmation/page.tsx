@@ -24,7 +24,11 @@ export default async function PageConfirmation({ searchParams }: PageProps<"/com
         <Icone nom="coche" className="size-8" />
       </span>
       <h1 className="mt-6 text-4xl sm:text-5xl">
-        {viaStripe ? (paye ? "Merci, votre paiement est confirmé" : "Merci pour votre commande") : "Merci, votre commande est envoyée"}
+        {viaStripe
+          ? paye
+            ? "Merci, votre paiement est confirmé"
+            : "Merci pour votre commande"
+          : "Merci, votre commande est envoyée"}
       </h1>
       {reference && (
         <p className="mt-4 text-taupe-fonce">

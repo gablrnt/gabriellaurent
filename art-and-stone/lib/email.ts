@@ -22,7 +22,9 @@ export async function envoyerEmail({ sujet, texte, a, repondreA }: Email): Promi
 
   if (!cle || !destinataire) {
     if (cle && !destinataire) console.warn("[e-mail] ORDER_EMAIL_TO n'est pas défini : demande journalisée.");
-    console.info(`\n[e-mail non envoyé — journalisé]\nÀ : ${destinataire ?? "(boutique)"}\nSujet : ${sujet}\n\n${texte}\n`);
+    console.info(
+      `\n[e-mail non envoyé — journalisé]\nÀ : ${destinataire ?? "(boutique)"}\nSujet : ${sujet}\n\n${texte}\n`,
+    );
     return { mode: "console" };
   }
 

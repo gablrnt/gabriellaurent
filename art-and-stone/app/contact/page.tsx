@@ -39,7 +39,9 @@ export default function PageContact() {
           <div className="rounded-sm border border-greige bg-blanc p-6">
             <p className="text-xs font-semibold tracking-[0.18em] text-taupe-fonce uppercase">Notre stock</p>
             <p className="mt-2 font-medium">ART &amp; STONE — {SITE.ville}</p>
-            <p className="mt-1 text-sm text-taupe-fonce">Retrait des commandes sur rendez-vous convenu par téléphone.</p>
+            <p className="mt-1 text-sm text-taupe-fonce">
+              Retrait des commandes sur rendez-vous convenu par téléphone.
+            </p>
           </div>
           <a
             href={SITE.instagram.url}

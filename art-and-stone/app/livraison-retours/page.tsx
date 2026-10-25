@@ -71,8 +71,7 @@ export default function PageLivraison() {
                 (par exemple : « 2 dalles cassées sur la palette 1 »), puis signez.
               </li>
               <li>
-                Prévenez-nous rapidement au{" "}
-                <a href={`tel:${SITE.telephoneLien}`}>{SITE.telephone}</a> ou via la{" "}
+                Prévenez-nous rapidement au <a href={`tel:${SITE.telephoneLien}`}>{SITE.telephone}</a> ou via la{" "}
                 <Link href="/contact">page contact</Link>, avec des photos.
               </li>
             </ol>
@@ -87,20 +86,20 @@ export default function PageLivraison() {
             Retours et droit de rétractation
           </h2>
           <p>
-            Vous disposez d&apos;un <strong>délai de rétractation de 14 jours</strong> à compter de la réception de votre
-            commande pour nous informer que vous souhaitez la retourner, sans avoir à vous justifier.
+            Vous disposez d&apos;un <strong>délai de rétractation de 14 jours</strong> à compter de la réception de
+            votre commande pour nous informer que vous souhaitez la retourner, sans avoir à vous justifier.
           </p>
           <div className="my-6 flex gap-4 rounded-sm border-l-4 border-terre bg-sable p-5">
             <Icone nom="poids" className="size-6 shrink-0 text-terre-fonce" />
             <p className="leading-relaxed">
               <strong>Les frais de retour sont à votre charge.</strong> La pierre étant lourde, le retour se fait
-              obligatoirement par transporteur, à vos frais. Pensez-y avant de commander : c&apos;est aussi pour cela que
-              nous vous conseillons de commander d&apos;abord des échantillons.
+              obligatoirement par transporteur, à vos frais. Pensez-y avant de commander : c&apos;est aussi pour cela
+              que nous vous conseillons de commander d&apos;abord des échantillons.
             </p>
           </div>
           <p>
-            Les produits doivent nous être retournés complets, dans leur état d&apos;origine. Le remboursement des produits
-            intervient après réception et vérification du retour.
+            Les produits doivent nous être retournés complets, dans leur état d&apos;origine. Le remboursement des
+            produits intervient après réception et vérification du retour.
           </p>
           <p>
             Pour tout retour, contactez-nous d&apos;abord au <a href={`tel:${SITE.telephoneLien}`}>{SITE.telephone}</a>{" "}

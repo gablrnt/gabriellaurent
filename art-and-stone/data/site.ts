@@ -18,15 +18,20 @@ export const SITE = {
   },
   avisGoogleUrl: "https://share.google/cCIgUkBiaQZzu4HG3",
   sitePro: "https://artandstone.fr",
-  /** Adresse publique du site, utilisée pour le SEO (sitemap, Open Graph). */
-  url: (process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000").replace(/\/$/, ""),
+  /**
+   * Adresse publique du site, utilisée pour le SEO (sitemap, Open Graph).
+   * À défaut de NEXT_PUBLIC_SITE_URL, l'adresse fournie par Vercel ou Netlify est utilisée.
+   */
+  url: (
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    (process.env.VERCEL_PROJECT_PRODUCTION_URL && `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`) ||
+    process.env.URL ||
+    "http://localhost:3000"
+  ).replace(/\/$/, ""),
   imagePartage: "https://artandstone.fr/images/hero_accueil.webp",
 } as const;
 
-export const BANDEAU_INFOS = [
-  "Livraison France, Corse & Suisse",
-  "Échantillons remboursés à la commande",
-] as const;
+export const BANDEAU_INFOS = ["Livraison France, Corse & Suisse", "Échantillons remboursés à la commande"] as const;
 
 export type LienNavigation = { href: string; label: string };
 

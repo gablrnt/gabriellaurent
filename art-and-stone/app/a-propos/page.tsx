@@ -43,8 +43,8 @@ export default function PageAPropos() {
           </p>
           <h2>Des blocs sélectionnés en carrière</h2>
           <p>
-            Nous choisissons nous-mêmes les blocs, directement en carrière. C&apos;est ce qui nous permet de vous proposer
-            des pierres que vous ne trouverez pas en grande distribution.
+            Nous choisissons nous-mêmes les blocs, directement en carrière. C&apos;est ce qui nous permet de vous
+            proposer des pierres que vous ne trouverez pas en grande distribution.
           </p>
           <h2>Des professionnels aux particuliers</h2>
           <p>

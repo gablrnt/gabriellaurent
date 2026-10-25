@@ -33,8 +33,7 @@ export const MODES: Record<ModeLivraison, { label: string; description: string }
   },
   grue: {
     label: "Livraison camion grue",
-    description:
-      "La grue du camion dépose les palettes chez vous, au plus près du chantier, selon l'accès.",
+    description: "La grue du camion dépose les palettes chez vous, au plus près du chantier, selon l'accès.",
   },
   retrait: {
     label: "Retrait gratuit au stock de Tarascon",

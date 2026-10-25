@@ -3,12 +3,7 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useId, useState } from "react";
 import { FINITIONS, TEINTES, USAGES, type Produit } from "@/data/produits";
-import {
-  filtrerProduits,
-  lireFiltres,
-  optionsDisponibles,
-  type Filtres,
-} from "@/lib/catalogue";
+import { filtrerProduits, lireFiltres, optionsDisponibles, type Filtres } from "@/lib/catalogue";
 import { CarteProduit } from "@/components/produit/CarteProduit";
 import { Icone } from "@/components/ui/Icone";
 import { InfoFinition } from "@/components/ui/InfoFinition";
@@ -29,15 +24,18 @@ function libelle(groupe: Groupe, valeur: string): string {
 
 export function GrilleProduits({ produits }: { produits: Produit[] }) {
   return (
-    <ul className="grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3 md:gap-x-6 xl:gap-x-8">
-      {produits.map((p) => (
-        <li key={p.slug} className="flex">
-          <div className="w-full">
-            <CarteProduit produit={p} />
-          </div>
-        </li>
-      ))}
-    </ul>
+    <>
+      <h2 className="sr-only">Liste des produits</h2>
+      <ul className="grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3 md:gap-x-6 xl:gap-x-8">
+        {produits.map((p) => (
+          <li key={p.slug} className="flex">
+            <div className="w-full">
+              <CarteProduit produit={p} />
+            </div>
+          </li>
+        ))}
+      </ul>
+    </>
   );
 }
 
@@ -78,9 +76,7 @@ export function Catalogue({ produits }: { produits: Produit[] }) {
 
   function basculer(groupe: Groupe, valeur: string) {
     const actuelles = filtres[groupe] as string[];
-    const suivantes = actuelles.includes(valeur)
-      ? actuelles.filter((v) => v !== valeur)
-      : [...actuelles, valeur];
+    const suivantes = actuelles.includes(valeur) ? actuelles.filter((v) => v !== valeur) : [...actuelles, valeur];
     appliquer({ ...filtres, [groupe]: suivantes });
   }
 
@@ -131,10 +127,7 @@ export function Catalogue({ produits }: { produits: Produit[] }) {
           </ul>
         )}
 
-        <div
-          id={idPanneau}
-          className={`${panneauOuvert ? "mt-4 grid" : "hidden"} gap-5 md:mt-0 md:grid md:gap-4`}
-        >
+        <div id={idPanneau} className={`${panneauOuvert ? "mt-4 grid" : "hidden"} gap-5 md:mt-0 md:grid md:gap-4`}>
           {groupes.map((groupe) => {
             const idTitre = `${idPanneau}-${groupe}`;
             return (
@@ -170,9 +163,7 @@ export function Catalogue({ produits }: { produits: Produit[] }) {
                           {actif && <Icone nom="coche" className="size-3.5" />}
                           {libelle(groupe, valeur)}
                         </button>
-                        {groupe === "finition" && (
-                          <InfoFinition finition={valeur as keyof typeof FINITIONS} />
-                        )}
+                        {groupe === "finition" && <InfoFinition finition={valeur as keyof typeof FINITIONS} />}
                       </li>
                     );
                   })}
@@ -204,7 +195,9 @@ export function Catalogue({ produits }: { produits: Produit[] }) {
       ) : (
         <div className="rounded-sm bg-sable px-6 py-12 text-center">
           <p className="font-serif text-2xl">Aucune pierre ne correspond à tous ces critères.</p>
-          <p className="mt-2 text-taupe-fonce">Retirez un filtre, ou appelez-nous : nous avons peut-être la pierre qu&apos;il vous faut.</p>
+          <p className="mt-2 text-taupe-fonce">
+            Retirez un filtre, ou appelez-nous : nous avons peut-être la pierre qu&apos;il vous faut.
+          </p>
           <button
             type="button"
             className="mt-6 text-terre-fonce underline underline-offset-4"

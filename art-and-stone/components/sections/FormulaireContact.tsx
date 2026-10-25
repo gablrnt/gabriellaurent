@@ -28,7 +28,12 @@ export function FormulaireContact() {
   async function envoyer(e: FormEvent) {
     e.preventDefault();
     setErreurEnvoi(null);
-    const propres = { ...donnees, nom: donnees.nom.trim(), email: donnees.email.trim(), message: donnees.message.trim() };
+    const propres = {
+      ...donnees,
+      nom: donnees.nom.trim(),
+      email: donnees.email.trim(),
+      message: donnees.message.trim(),
+    };
     const nouvelles = validerContact(propres);
     setErreurs(nouvelles);
     if (!aucuneErreur(nouvelles)) {
@@ -123,7 +128,10 @@ export function FormulaireContact() {
       />
       <ChampPiege valeur={piege} onChange={setPiege} />
       {erreurEnvoi && (
-        <p role="alert" className="rounded-sm border border-erreur/40 bg-erreur/5 px-4 py-3 text-sm text-erreur sm:col-span-2">
+        <p
+          role="alert"
+          className="rounded-sm border border-erreur/40 bg-erreur/5 px-4 py-3 text-sm text-erreur sm:col-span-2"
+        >
           {erreurEnvoi}
         </p>
       )}

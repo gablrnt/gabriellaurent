@@ -3,7 +3,7 @@ import { SITE } from "@/data/site";
 
 export function Logo({ clair = false }: { clair?: boolean }) {
   return (
-    <Link href="/" className="group inline-flex flex-col leading-none" aria-label="ART & STONE, retour à l'accueil">
+    <Link href="/" className="group inline-flex flex-col leading-none">
       <span
         className={`font-serif text-[1.35rem] font-semibold tracking-logo sm:text-2xl ${clair ? "text-creme" : "text-anthracite"}`}
       >
@@ -14,6 +14,7 @@ export function Logo({ clair = false }: { clair?: boolean }) {
       >
         {SITE.sousTitre}
       </span>
+      <span className="sr-only"> — retour à l&apos;accueil</span>
     </Link>
   );
 }

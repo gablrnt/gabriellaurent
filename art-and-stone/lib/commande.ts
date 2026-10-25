@@ -59,9 +59,7 @@ export function nettoyerLigne(brute: unknown): LignePanier | null {
     const produit = getProduit(l.slug);
     if (!produit) return null;
     const profil =
-      typeof l.profilNez === "string" && l.profilNez in PROFILS_NEZ
-        ? (l.profilNez as ProfilNez)
-        : undefined;
+      typeof l.profilNez === "string" && l.profilNez in PROFILS_NEZ ? (l.profilNez as ProfilNez) : undefined;
     if (produit.profilNezObligatoire && !profil) return null;
     return {
       type: "produit",
@@ -138,8 +136,7 @@ export function resoudrePanier(lignes: LignePanier[]): PanierResolu {
     if (ligne.type === "produit") {
       const produit = getProduit(ligne.slug);
       if (!produit) continue;
-      const poidsKg =
-        produit.poidsKgParUnite === null ? null : produit.poidsKgParUnite * ligne.quantite;
+      const poidsKg = produit.poidsKgParUnite === null ? null : produit.poidsKgParUnite * ligne.quantite;
       if (poidsKg === null) poidsConnu = false;
       else poidsTotal += poidsKg;
       resolues.push({
@@ -147,9 +144,7 @@ export function resoudrePanier(lignes: LignePanier[]): PanierResolu {
         type: "produit",
         slug: produit.slug,
         nom: produit.nom,
-        details: ligne.profilNez
-          ? [`Profil de nez ${ligne.profilNez} — ${PROFILS_NEZ[ligne.profilNez].nom}`]
-          : [],
+        details: ligne.profilNez ? [`Profil de nez ${ligne.profilNez} — ${PROFILS_NEZ[ligne.profilNez].nom}`] : [],
         image: produit.images[0] ? { url: produit.images[0].url, alt: produit.images[0].alt } : null,
         href: `/produit/${produit.slug}`,
         unite: produit.unite,
@@ -202,11 +197,7 @@ export function modesDisponibles(panier: PanierResolu): ModeLivraison[] {
   return panier.uniquementEchantillons ? MODES_ECHANTILLONS : MODES_COMMANDE;
 }
 
-export function calculerFraisLivraison(
-  panier: PanierResolu,
-  zone: ZoneLivraison,
-  mode: ModeLivraison,
-): FraisLivraison {
+export function calculerFraisLivraison(panier: PanierResolu, zone: ZoneLivraison, mode: ModeLivraison): FraisLivraison {
   if (mode === "retrait") return { statut: "calcule", montant: 0, libelle: "Gratuit" };
   if (ZONES[zone].surDevis) return { statut: "devis", montant: null, libelle: MESSAGE_DEVIS };
 

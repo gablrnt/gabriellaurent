@@ -20,7 +20,13 @@ const CONTOURS: Record<ProfilNez, string> = {
 export function ProfilNezSchema({ profil, className = "w-20" }: { profil: ProfilNez; className?: string }) {
   return (
     <svg viewBox="0 0 80 48" className={className} aria-hidden="true" focusable="false">
-      <path d={CONTOURS[profil]} fill="var(--color-greige)" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+      <path
+        d={CONTOURS[profil]}
+        fill="var(--color-greige)"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }

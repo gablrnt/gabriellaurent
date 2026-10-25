@@ -1,11 +1,5 @@
 import Link from "next/link";
-import {
-  CATEGORIES,
-  FINITIONS,
-  TEINTES,
-  USAGES,
-  type Produit,
-} from "@/data/produits";
+import { CATEGORIES, FINITIONS, TEINTES, USAGES, type Produit } from "@/data/produits";
 import { MODES } from "@/data/livraison";
 import { formatNombre } from "@/lib/format";
 
@@ -30,7 +24,8 @@ export function Caracteristiques({ produit }: { produit: Produit }) {
   const lignes: [string, string][] = [["Catégorie", CATEGORIES[produit.categorie].titre]];
   if (produit.teinte) lignes.push(["Teinte", TEINTES[produit.teinte].label]);
   if (produit.finition) lignes.push(["Finition", FINITIONS[produit.finition].label]);
-  if (produit.usages.length > 0) lignes.push(["Usages recommandés", produit.usages.map((u) => USAGES[u].label).join(", ")]);
+  if (produit.usages.length > 0)
+    lignes.push(["Usages recommandés", produit.usages.map((u) => USAGES[u].label).join(", ")]);
   lignes.push(["Vente", UNITE_VENTE[produit.unite]]);
   if (produit.formats) lignes.push(["Formats", produit.formats]);
   if (produit.epaisseur) lignes.push(["Épaisseur", produit.epaisseur]);
@@ -78,9 +73,7 @@ export function Pose({ produit }: { produit: Produit }) {
           <li>Prévoyez des joints de 3 à 6 mm en intérieur, et d&apos;au moins 4,5 mm en extérieur.</li>
           <li>Utilisez une colle et des joints souples, de teinte claire, adaptés à la pierre naturelle.</li>
           <li>En extérieur, gardez une pente d&apos;au moins 1,5 % pour que l&apos;eau s&apos;écoule.</li>
-          <li>
-            Faites poser votre pierre par un professionnel, dans le respect des DTU 52.1 et 52.2.
-          </li>
+          <li>Faites poser votre pierre par un professionnel, dans le respect des DTU 52.1 et 52.2.</li>
         </ul>
       ) : (
         <ul>

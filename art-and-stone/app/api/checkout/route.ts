@@ -34,12 +34,12 @@ export async function POST(requete: Request) {
   // La boutique reçoit les détails de livraison ; le paiement se vérifie dans le tableau de bord Stripe.
   after(() =>
     envoyerEmail({
-    sujet: `Commande ${commande.reference} — paiement Stripe en cours — ${commande.coordonnees.prenom} ${commande.coordonnees.nom}`,
-    texte: resumeCommande(
-      commande,
-      "Le client a été redirigé vers le paiement Stripe. Vérifiez dans Stripe que le paiement est confirmé (référence ci-dessous) avant de préparer la commande.",
-    ),
-    repondreA: commande.coordonnees.email,
+      sujet: `Commande ${commande.reference} — paiement Stripe en cours — ${commande.coordonnees.prenom} ${commande.coordonnees.nom}`,
+      texte: resumeCommande(
+        commande,
+        "Le client a été redirigé vers le paiement Stripe. Vérifiez dans Stripe que le paiement est confirmé (référence ci-dessous) avant de préparer la commande.",
+      ),
+      repondreA: commande.coordonnees.email,
     }).catch((erreur) => console.error("[checkout] e-mail non envoyé :", erreur)),
   );
 

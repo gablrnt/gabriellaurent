@@ -2,21 +2,8 @@
 
 import Link from "next/link";
 import { useId, useRef, useState } from "react";
-import {
-  KIT_ECHANTILLONS,
-  MARGE_COUPE,
-  PROFILS_NEZ,
-  UNITES,
-  type ProfilNez,
-  type Produit,
-} from "@/data/produits";
-import {
-  lireNombre,
-  margeApplicable,
-  nombreBidons,
-  quantiteACommander,
-  surfaceParBidon,
-} from "@/lib/calculs";
+import { KIT_ECHANTILLONS, MARGE_COUPE, PROFILS_NEZ, UNITES, type ProfilNez, type Produit } from "@/data/produits";
+import { lireNombre, margeApplicable, nombreBidons, quantiteACommander, surfaceParBidon } from "@/lib/calculs";
 import { formatNombre, formatPoids, formatPrix } from "@/lib/format";
 import { usePanier } from "@/components/panier/PanierProvider";
 import { Bouton, LienBouton } from "@/components/ui/Bouton";
@@ -57,12 +44,7 @@ function ChoixProfilNez({
 }) {
   const idErreur = useId();
   return (
-    <fieldset
-      ref={groupeRef}
-      tabIndex={-1}
-      aria-describedby={erreur ? idErreur : undefined}
-      className="rounded-sm"
-    >
+    <fieldset ref={groupeRef} tabIndex={-1} aria-describedby={erreur ? idErreur : undefined} className="rounded-sm">
       <legend className="mb-1 text-sm font-semibold">
         Profil de nez <span className="font-normal text-taupe-fonce">(obligatoire)</span>
       </legend>
@@ -189,7 +171,13 @@ function CalculateurPierre({ produit }: { produit: Produit }) {
         </div>
         {erreurSaisie && (
           <p id={idAide} className="mt-1.5 text-sm font-medium text-erreur">
-            Indiquez {produit.unite === "piece" ? "le nombre de pièces" : produit.unite === "m2" ? "votre surface" : "votre longueur"} pour calculer la quantité.
+            Indiquez{" "}
+            {produit.unite === "piece"
+              ? "le nombre de pièces"
+              : produit.unite === "m2"
+                ? "votre surface"
+                : "votre longueur"}{" "}
+            pour calculer la quantité.
           </p>
         )}
       </div>
@@ -207,8 +195,8 @@ function CalculateurPierre({ produit }: { produit: Produit }) {
             <span className="text-sm font-medium">Ajouter {MARGE_COUPE * 100} % de marge de coupe</span>
           </label>
           <p id={idMarge} className="mt-1 pl-8 text-sm text-taupe-fonce">
-            Recommandé : cette marge couvre les coupes en bordure, la casse éventuelle et le choix des teintes à
-            la pose.
+            Recommandé : cette marge couvre les coupes en bordure, la casse éventuelle et le choix des teintes à la
+            pose.
           </p>
         </div>
       )}
@@ -349,9 +337,7 @@ export function AchatProduit({ produit }: { produit: Produit }) {
         className="w-full"
       >
         <Icone nom="echantillons" className="size-5" />
-        <span>
-          Commander un échantillon — {formatPrix(KIT_ECHANTILLONS.prix)}, remboursé sur votre commande
-        </span>
+        <span>Commander un échantillon — {formatPrix(KIT_ECHANTILLONS.prix)}, remboursé sur votre commande</span>
       </LienBouton>
     </div>
   );

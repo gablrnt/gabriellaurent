@@ -107,7 +107,13 @@ function ImageZoomable({ image }: { image: ImageProduit }) {
           const distance = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
           const mx = (pts[0].x + pts[1].x) / 2;
           const my = (pts[0].y + pts[1].y) / 2;
-          setVue(borner({ echelle: Math.max(1, g.echelle * (distance / g.distance)), x: g.x + mx - g.mx, y: g.y + my - g.my }));
+          setVue(
+            borner({
+              echelle: Math.max(1, g.echelle * (distance / g.distance)),
+              x: g.x + mx - g.mx,
+              y: g.y + my - g.my,
+            }),
+          );
         } else if (pts.length === 1 && vue.echelle > 1) {
           const dx = pts[0].x - g.mx;
           const dy = pts[0].y - g.my;
@@ -208,9 +214,7 @@ export function GalerieProduit({ images, nom }: { images: ImageProduit[]; nom: s
             preload={index === 0}
             sizes="(min-width: 1024px) 50vw, 100vw"
             className="object-cover transition-transform duration-200 ease-out"
-            style={
-              origineZoom ? { transform: `scale(${ZOOM_SURVOL})`, transformOrigin: origineZoom } : undefined
-            }
+            style={origineZoom ? { transform: `scale(${ZOOM_SURVOL})`, transformOrigin: origineZoom } : undefined}
           />
           <span className="absolute right-3 bottom-3 inline-flex items-center gap-1.5 rounded-full bg-creme/90 px-3 py-1.5 text-xs font-medium text-anthracite shadow-sm">
             <Icone nom="agrandir" className="size-4" />
