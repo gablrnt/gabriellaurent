@@ -1,0 +1,180 @@
+@import "tailwindcss";
+
+/*
+ * Design system ART & STONE
+ * Les couleurs sont des tokens Tailwind : bg-creme, text-anthracite, bg-terre…
+ * Contrastes vérifiés (WCAG AA) :
+ *  - texte blanc sur terre (#A0674B) : 4,6:1
+ *  - terre-fonce (#8A5640) sur creme : 5,3:1  → liens et petits textes en accent
+ *  - taupe-fonce (#6B5F4F) sur creme : 5,5:1  → textes secondaires
+ *  - taupe (#8A7D6B) est réservé aux bordures, icônes et grands textes.
+ */
+@theme {
+  --color-creme: #f5f0e8;
+  --color-sable: #ede6da;
+  --color-greige: #c9bba6;
+  --color-taupe: #8a7d6b;
+  --color-taupe-fonce: #6b5f4f;
+  --color-anthracite: #2b2622;
+  --color-terre: #a0674b;
+  --color-terre-fonce: #8a5640;
+  --color-blanc: #fffdf9;
+  --color-erreur: #a3352b;
+  --color-succes: #3f6b45;
+
+  --font-serif: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-sans: var(--font-inter), Inter, system-ui, -apple-system, sans-serif;
+
+  --tracking-logo: 0.32em;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 7rem;
+  }
+
+  body {
+    background-color: var(--color-creme);
+    color: var(--color-anthracite);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Focus bien visible au clavier, sur tous les fonds */
+  :focus-visible {
+    outline: 3px solid var(--color-terre-fonce);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background-color: var(--color-greige);
+    color: var(--color-anthracite);
+  }
+
+  summary {
+    cursor: pointer;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+}
+
+@layer components {
+  .conteneur {
+    width: 100%;
+    max-width: 80rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .conteneur {
+      padding-inline: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .conteneur {
+      padding-inline: 2rem;
+    }
+  }
+
+  .surtitre {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-terre-fonce);
+  }
+
+  /* Texte long (pages d'information, CGV…) */
+  .prose-pierre {
+    max-width: 46rem;
+    line-height: 1.75;
+  }
+
+  .prose-pierre h2 {
+    font-size: 1.875rem;
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .prose-pierre h3 {
+    font-size: 1.375rem;
+    margin-top: 1.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .prose-pierre p,
+  .prose-pierre ul,
+  .prose-pierre ol {
+    margin-bottom: 1rem;
+  }
+
+  .prose-pierre ul {
+    list-style: disc;
+    padding-left: 1.25rem;
+  }
+
+  .prose-pierre ol {
+    list-style: decimal;
+    padding-left: 1.25rem;
+  }
+
+  .prose-pierre li {
+    margin-bottom: 0.375rem;
+  }
+
+  .prose-pierre a {
+    color: var(--color-terre-fonce);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .prose-pierre strong {
+    font-weight: 600;
+  }
+}
+
+/* Apparition légère au scroll (désactivée si l'utilisateur réduit les animations) */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal] {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity 0.7s ease-out,
+      transform 0.7s ease-out;
+  }
+
+  .js [data-reveal].est-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
