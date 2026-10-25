@@ -3,11 +3,17 @@ const formateurPrix = new Intl.NumberFormat("fr-FR", {
   currency: "EUR",
 });
 
+const formateurPrixRond = new Intl.NumberFormat("fr-FR", {
+  style: "currency",
+  currency: "EUR",
+  maximumFractionDigits: 0,
+});
+
 const formateurNombre = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 2 });
 
-/** 79 → « 79,00 € » */
+/** 79 → « 79 € » ; 9.9 → « 9,90 € » */
 export function formatPrix(montant: number): string {
-  return formateurPrix.format(montant);
+  return Number.isInteger(montant) ? formateurPrixRond.format(montant) : formateurPrix.format(montant);
 }
 
 /** 12.5 → « 12,5 » */

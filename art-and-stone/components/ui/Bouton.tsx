@@ -5,7 +5,7 @@ type Variante = "primaire" | "secondaire" | "clair" | "lien";
 type Taille = "normal" | "grand";
 
 const BASE =
-  "inline-flex items-center justify-center gap-2 rounded-sm font-medium transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50 text-center";
+  "inline-flex items-center justify-center gap-2 rounded-sm font-medium transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50 text-center [&>svg]:shrink-0";
 
 const VARIANTES: Record<Variante, string> = {
   // Texte blanc sur terre cuite : contraste 4,6:1 (AA)
