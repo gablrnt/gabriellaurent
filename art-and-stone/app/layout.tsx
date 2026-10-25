@@ -3,7 +3,6 @@ import { Cormorant_Garamond, Inter } from "next/font/google";
 import { BandeauInfos, BandeauPrix } from "@/components/layout/Bandeaux";
 import { EnTete } from "@/components/layout/EnTete";
 import { PiedDePage } from "@/components/layout/PiedDePage";
-import { RevealObserver } from "@/components/layout/RevealObserver";
 import { PanierProvider } from "@/components/panier/PanierProvider";
 import { SITE } from "@/data/site";
 import "./globals.css";
@@ -35,7 +34,7 @@ export const metadata: Metadata = {
     siteName: "ART & STONE",
     title: "ART & STONE — Pierre naturelle livrée chez vous",
     description: SITE.description,
-    images: [{ url: SITE.imagePartage, alt: "Terrasse en pierre naturelle ART & STONE" }],
+    images: [{ url: SITE.imagePartage, alt: "Réalisation en pierre naturelle ART & STONE" }],
   },
   formatDetection: { telephone: false },
 };
@@ -67,7 +66,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           </main>
           <PiedDePage />
         </PanierProvider>
-        <RevealObserver />
       </body>
     </html>
   );

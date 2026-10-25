@@ -111,6 +111,26 @@ export function Catalogue({ produits }: { produits: Produit[] }) {
           )}
         </div>
 
+        {!panneauOuvert && nombreActifs > 0 && (
+          <ul className="mt-3 flex flex-wrap gap-2 md:hidden" aria-label="Filtres actifs">
+            {(Object.keys(filtres) as Groupe[]).flatMap((groupe) =>
+              (filtres[groupe] as string[]).map((valeur) => (
+                <li key={`${groupe}-${valeur}`}>
+                  <button
+                    type="button"
+                    onClick={() => basculer(groupe, valeur)}
+                    className="inline-flex min-h-9 items-center gap-1.5 rounded-full bg-anthracite px-3 text-sm text-creme"
+                  >
+                    {libelle(groupe, valeur)}
+                    <Icone nom="fermer" className="size-3.5" />
+                    <span className="sr-only">(retirer ce filtre)</span>
+                  </button>
+                </li>
+              )),
+            )}
+          </ul>
+        )}
+
         <div
           id={idPanneau}
           className={`${panneauOuvert ? "mt-4 grid" : "hidden"} gap-5 md:mt-0 md:grid md:gap-4`}

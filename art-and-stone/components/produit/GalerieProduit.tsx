@@ -88,7 +88,11 @@ function ImageZoomable({ image }: { image: ImageProduit }) {
       ref={zoneRef}
       className={`relative h-full w-full touch-none overflow-hidden select-none ${vue.echelle > 1 ? "cursor-grab active:cursor-grabbing" : "cursor-zoom-in"}`}
       onPointerDown={(e) => {
-        e.currentTarget.setPointerCapture(e.pointerId);
+        try {
+          e.currentTarget.setPointerCapture(e.pointerId);
+        } catch {
+          // Pointeur déjà relâché : rien à capturer.
+        }
         pointeurs.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
         aBouge.current = false;
         debutGeste();

@@ -1,0 +1,5 @@
+# Déploiement Netlify : le site se trouve dans le dossier art-and-stone/
+[build]
+  base = "art-and-stone"
+  command = "npm run build"
+  publish = ".next"

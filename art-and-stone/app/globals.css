@@ -70,6 +70,11 @@
     cursor: pointer;
   }
 
+  /* Un numéro de téléphone ne se coupe jamais en fin de ligne */
+  a[href^="tel:"] {
+    white-space: nowrap;
+  }
+
   summary::-webkit-details-marker {
     display: none;
   }
