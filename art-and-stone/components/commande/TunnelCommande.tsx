@@ -1,10 +1,20 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { MODES, ZONES, type ModeLivraison, type ZoneLivraison } from "@/data/livraison";
-import { calculerFraisLivraison, modesDisponibles, resoudrePanier, type FraisLivraison } from "@/lib/commande";
+import {
+  calculerFraisLivraison,
+  libelleFraisTexte,
+  modesDisponibles,
+  nouvelleReference,
+  resoudrePanier,
+  resumeArticles,
+  resumeCommande,
+  type FraisLivraison,
+} from "@/lib/commande";
+import { envoyerFormulaire } from "@/lib/formulaires";
 import { formatNombre, formatPrix } from "@/lib/format";
 import {
   aucuneErreur,
@@ -67,10 +77,8 @@ function BarreProgression({ etape }: { etape: number }) {
   );
 }
 
-export function TunnelCommande({ paiementEnLigne }: { paiementEnLigne: boolean }) {
+export function TunnelCommande() {
   const router = useRouter();
-  const recherche = useSearchParams();
-  const paiementAnnule = recherche.get("paiement") === "annule";
   const { lignes, pret, vider } = usePanier();
 
   const [etape, setEtape] = useState(0);
@@ -125,7 +133,6 @@ export function TunnelCommande({ paiementEnLigne }: { paiementEnLigne: boolean }
   const modeValide = mode !== "" && modes.includes(mode) ? mode : "";
   const frais = adresse.zone && modeValide ? calculerFraisLivraison(panier, zone, modeValide) : null;
   const total = panier.sousTotal + (frais?.montant ?? 0);
-  const payerEnLigne = paiementEnLigne && frais?.statut === "calcule";
 
   function focusPremiereErreur() {
     requestAnimationFrame(() => {
@@ -156,22 +163,34 @@ export function TunnelCommande({ paiementEnLigne }: { paiementEnLigne: boolean }
       return;
     }
     setErreurs({});
+    if (!frais || !modeValide) return;
     setEnvoi(true);
-    const corps = { lignes, coordonnees, adresse, mode: modeValide, message, cgv, site: piege };
+    const reference = nouvelleReference();
+    const infos = { reference, coordonnees, adresse: { ...adresse, zone }, mode: modeValide, message };
     try {
-      const reponse = await fetch(payerEnLigne ? "/api/checkout" : "/api/commande", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(corps),
+      await envoyerFormulaire("commande", {
+        subject: `Commande ${reference} — ${coordonnees.prenom} ${coordonnees.nom}${frais.statut === "devis" ? " (devis livraison)" : ""}`,
+        reference,
+        recapitulatif: resumeCommande(infos, panier, frais),
+        prenom: coordonnees.prenom,
+        nom: coordonnees.nom,
+        email: coordonnees.email,
+        telephone: coordonnees.telephone,
+        adresse: adresse.adresse,
+        complement: adresse.complement,
+        codePostal: adresse.codePostal,
+        ville: adresse.ville,
+        zone: ZONES[zone].label,
+        pays: adresse.pays,
+        livraison: MODES[modeValide].label,
+        fraisLivraison: libelleFraisTexte(frais),
+        total: formatPrix(total),
+        articles: resumeArticles(panier),
+        message,
+        "bot-field": piege,
       });
-      const donnees = (await reponse.json().catch(() => ({}))) as { url?: string; reference?: string; erreur?: string };
-      if (!reponse.ok) throw new Error(donnees.erreur || "Une erreur est survenue.");
-      if (payerEnLigne && donnees.url) {
-        window.location.assign(donnees.url);
-        return;
-      }
       vider();
-      router.push(`/commande/confirmation?ref=${encodeURIComponent(donnees.reference ?? "")}`);
+      router.push(`/commande/confirmation?ref=${encodeURIComponent(reference)}`);
     } catch (erreur) {
       setErreurEnvoi(erreur instanceof Error ? erreur.message : "Une erreur est survenue.");
       setEnvoi(false);
@@ -183,11 +202,6 @@ export function TunnelCommande({ paiementEnLigne }: { paiementEnLigne: boolean }
   return (
     <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start">
       <div>
-        {paiementAnnule && etape === 0 && (
-          <p className="mb-6 rounded-sm bg-sable px-4 py-3 text-sm">
-            Le paiement a été annulé : votre panier est conservé, vous pouvez reprendre votre commande.
-          </p>
-        )}
         <BarreProgression etape={etape} />
         <h2 ref={titreRef} tabIndex={-1} className="scroll-mt-28 text-3xl outline-none sm:text-4xl">
           {titre}
@@ -475,15 +489,13 @@ export function TunnelCommande({ paiementEnLigne }: { paiementEnLigne: boolean }
               </dl>
             </div>
 
-            {!payerEnLigne && (
-              <p className="flex gap-3 rounded-sm bg-sable px-4 py-3 text-sm">
-                <Icone nom="telephone" className="size-5 shrink-0 text-terre-fonce" />
-                <span>
-                  Aucun paiement n&apos;est demandé maintenant. En confirmant, vous nous envoyez votre commande : nous
-                  vous recontactons sous 24 h pour valider la livraison et le paiement.
-                </span>
-              </p>
-            )}
+            <p className="flex gap-3 rounded-sm bg-sable px-4 py-3 text-sm">
+              <Icone nom="telephone" className="size-5 shrink-0 text-terre-fonce" />
+              <span>
+                Aucun paiement n&apos;est demandé maintenant. En confirmant, vous nous envoyez votre commande : nous
+                vous recontactons sous 24 h pour valider la livraison et le paiement.
+              </span>
+            </p>
 
             <div>
               <label className="flex cursor-pointer items-start gap-3">
@@ -528,23 +540,9 @@ export function TunnelCommande({ paiementEnLigne }: { paiementEnLigne: boolean }
                 Retour
               </Bouton>
               <Bouton type="submit" taille="grand" disabled={envoi} className="sm:min-w-72">
-                {envoi ? (
-                  "Envoi en cours…"
-                ) : payerEnLigne ? (
-                  <>
-                    <Icone nom="cadenas" className="size-5" />
-                    Payer {formatPrix(total)} par carte
-                  </>
-                ) : (
-                  "Confirmer la commande"
-                )}
+                {envoi ? "Envoi en cours…" : "Confirmer la commande"}
               </Bouton>
             </div>
-            {payerEnLigne && (
-              <p className="text-xs text-taupe-fonce">
-                Paiement sécurisé par Stripe : vos coordonnées bancaires ne transitent pas par notre site.
-              </p>
-            )}
           </form>
         )}
       </div>

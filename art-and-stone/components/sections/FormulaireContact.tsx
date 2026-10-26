@@ -5,6 +5,7 @@ import { useState, type FormEvent } from "react";
 import { Bouton } from "@/components/ui/Bouton";
 import { Champ, ChampListe, ChampPiege, ChampTexte } from "@/components/ui/Champ";
 import { Icone } from "@/components/ui/Icone";
+import { envoyerFormulaire } from "@/lib/formulaires";
 import {
   SUJETS_CONTACT,
   aucuneErreur,
@@ -42,13 +43,16 @@ export function FormulaireContact() {
     }
     setEtat("envoi");
     try {
-      const reponse = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...propres, site: piege }),
+      const sujet = SUJETS_CONTACT[propres.sujet as SujetContact];
+      await envoyerFormulaire("contact", {
+        subject: `Contact site — ${sujet} — ${propres.nom}`,
+        nom: propres.nom,
+        email: propres.email,
+        telephone: propres.telephone,
+        sujet,
+        message: propres.message,
+        "bot-field": piege,
       });
-      const resultat = (await reponse.json().catch(() => ({}))) as { erreur?: string };
-      if (!reponse.ok) throw new Error(resultat.erreur || "Une erreur est survenue.");
       setEtat("envoye");
       setDonnees(VIDE);
     } catch (erreur) {

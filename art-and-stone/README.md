@@ -1,7 +1,7 @@
 # ART & STONE — boutique en ligne (particuliers)
 
 Boutique B2C de pierre naturelle d'ART & STONE (Tarascon, 13).
-Next.js 16 (App Router) · TypeScript · Tailwind CSS 4. Aucune dépendance en dehors de Next.js et React : Stripe et Resend sont appelés directement via leurs API.
+Next.js 16 (App Router, export statique) · TypeScript · Tailwind CSS 4. Aucune dépendance en dehors de Next.js et React.
 
 ---
 
@@ -12,7 +12,6 @@ Prérequis : **Node.js 20.9 ou plus récent** (Node 22 recommandé).
 ```bash
 cd art-and-stone
 npm install
-cp .env.example .env.local   # puis complétez les variables (facultatif en local)
 npm run dev                  # http://localhost:3000
 ```
 
@@ -21,27 +20,16 @@ Autres commandes :
 | Commande        | Rôle                                                  |
 | --------------- | ----------------------------------------------------- |
 | `npm run dev`   | serveur de développement                              |
-| `npm run build` | build de production (vérifie aussi le TypeScript)     |
-| `npm run start` | lance le build de production (`npm run build` avant)  |
+| `npm run build` | génère le site statique dans `out/`                   |
 | `npm run lint`  | vérification du code (ESLint)                         |
 
-## 2. Variables d'environnement
+## 2. Site statique, formulaires et variables
 
-Voir `.env.example`. Toutes sont facultatives pour tester en local.
+`npm run build` produit le dossier **`out/`** : uniquement des fichiers HTML/CSS/JS, publiables tels quels (glisser-déposer sur Netlify, ou n'importe quel hébergeur).
 
-| Variable               | Effet                                                                                                                                           |
-| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| `NEXT_PUBLIC_SITE_URL` | adresse publique du site (ex. `https://boutique.artandstone.fr`) : sitemap, Open Graph, retour après paiement.                                   |
-| `STRIPE_SECRET_KEY`    | active le paiement par carte (Stripe Checkout). **Sans cette clé**, la dernière étape affiche « Confirmer la commande » : la commande vous est envoyée et vous rappelez le client sous 24 h. |
-| `RESEND_API_KEY`       | envoi des e-mails (commandes, contact, accusé de réception client). **Sans cette clé**, les demandes sont seulement écrites dans les journaux du serveur. |
-| `ORDER_EMAIL_TO`       | adresse qui reçoit les commandes et les messages.                                                                                               |
-| `RESEND_FROM`          | (facultatif) expéditeur, sur un domaine vérifié dans Resend.                                                                                    |
-
-> ⚠️ Ces variables sont lues **au moment du build**. Après les avoir modifiées sur Vercel ou Netlify, **relancez un déploiement**.
-
-Comment se décide le paiement en ligne : le bouton « Payer par carte » n'apparaît que si `STRIPE_SECRET_KEY` est définie **et** que les frais de livraison sont calculables (retrait à Tarascon, ou poids connu de tous les produits dans une zone tarifée). Sinon, la commande part par e-mail avec la mention « Frais de livraison confirmés sous 24 h » ou « Devis de livraison sous 24 h ».
-
-Avec Stripe : vous recevez un e-mail « paiement Stripe en cours » avec l'adresse et le mode de livraison. **Vérifiez toujours dans le tableau de bord Stripe que le paiement est bien encaissé** (même référence `AS-…`) avant de préparer la commande.
+- **Formulaires** (contact et commande) : gérés par **Netlify Forms**, déclarés dans `public/__forms.html`. Dans Netlify : onglet **Forms → Enable form detection**, puis redéployez. Les demandes arrivent dans l'onglet Forms ; pour les recevoir par e-mail : **Forms → Form notifications**. En local (`npm run dev`), les envois sont seulement affichés dans la console du navigateur.
+- **Paiement** : aucun paiement en ligne ; la boutique rappelle le client sous 24 h pour valider la livraison et le paiement.
+- **Variable facultative** : `NEXT_PUBLIC_SITE_URL` (adresse publique, pour le sitemap et le partage). Sur Netlify, l'adresse du site est utilisée automatiquement.
 
 ## 3. Modifier le contenu
 
@@ -94,23 +82,8 @@ Dans `data/livraison.ts`, la grille `TARIFS` donne, pour chaque mode (hayon, gru
 
 ## 4. Déploiement
 
-Le site se trouve dans le sous-dossier `art-and-stone/` du dépôt.
-
-### Vercel
-
-1. « Add New… → Project », importez le dépôt GitHub.
-2. **Root Directory : `art-and-stone`** (Framework : Next.js, détecté automatiquement).
-3. Ajoutez les variables d'environnement, puis « Deploy ».
-
-### Netlify
-
-Le fichier `netlify.toml` à la racine du dépôt indique déjà le dossier (`base = "art-and-stone"`), la commande (`npm run build`) et le dossier publié (`.next`). Importez le dépôt, ajoutez les variables d'environnement (portée « Builds » et « Functions »), déployez.
-
-### Après la mise en ligne
-
-- Renseignez `NEXT_PUBLIC_SITE_URL` avec l'adresse définitive et redéployez.
-- Vérifiez l'expéditeur Resend (domaine vérifié) et faites une commande test.
-- Passez Stripe en mode live (`sk_live_…`) après un test en mode test (`sk_test_…`, carte `4242 4242 4242 4242`).
+- **Glisser-déposer** : lancez `npm run build`, puis glissez le dossier `out/` sur https://app.netlify.com/drop (ou dans l'onglet Deploys d'un projet existant).
+- **Depuis GitHub** : le fichier `netlify.toml` à la racine du dépôt indique le dossier (`art-and-stone`), la commande (`npm run build`) et le dossier publié (`out`). Chaque modification poussée sur la branche publiée redéploie le site.
 
 ## 5. À compléter avant l'ouverture
 
@@ -125,15 +98,13 @@ Le fichier `netlify.toml` à la racine du dépôt indique déjà le dossier (`ba
 ## 6. Organisation du code
 
 ```
-app/                    pages (App Router) et routes API
+app/                    pages (App Router)
   [categorie]/          Sols, Piscine, Jardin, Murs, Entretien
-  produit/[slug]/       fiche produit (générée statiquement)
-  api/commande          commande sans paiement → e-mail
-  api/checkout          paiement Stripe Checkout
-  api/contact           formulaire de contact → e-mail
+  produit/[slug]/       fiche produit
 components/             composants réutilisables (layout, produit, panier, commande, sections, ui)
 data/                   contenu modifiable (voir ci-dessus)
-lib/                    calculs, validation, panier, e-mail, Stripe
+lib/                    calculs, validation, panier, envoi des formulaires
+public/__forms.html     déclaration des formulaires pour Netlify Forms
 ```
 
-Choix techniques : panier en React context + `localStorage` (fonctionne aussi si le stockage est bloqué, le temps de la visite) ; prix toujours recalculés côté serveur ; validation des formulaires partagée navigateur/serveur ; champ piège anti-robots ; animations désactivées si l'utilisateur a demandé à réduire les animations.
+Choix techniques : panier en React context + `localStorage` (fonctionne aussi si le stockage est bloqué, le temps de la visite) ; prix recalculés à partir de `data/produits.ts` ; validation des formulaires dans le navigateur ; champ piège anti-robots ; animations désactivées si l'utilisateur a demandé à réduire les animations.

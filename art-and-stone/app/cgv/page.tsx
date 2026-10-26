@@ -58,9 +58,9 @@ export default function PageCGV() {
 
       <h2>6. Paiement</h2>
       <p>
-        Le paiement s&apos;effectue par carte bancaire via la solution sécurisée Stripe, ou selon les modalités
-        convenues avec le client lorsque la commande est confirmée par téléphone [préciser : virement, etc.]. Les
-        coordonnées bancaires ne transitent pas par le site d&apos;ART &amp; STONE.
+        Aucun paiement n&apos;est demandé sur le site. Le paiement s&apos;effectue selon les modalités convenues avec
+        le client lorsque ART &amp; STONE le recontacte pour confirmer la commande [préciser : virement, carte, etc.].
+        Les coordonnées bancaires ne transitent pas par le site d&apos;ART &amp; STONE.
       </p>
 
       <h2>7. Échantillons</h2>

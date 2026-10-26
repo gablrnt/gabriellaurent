@@ -1,28 +1,14 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Site 100 % statique : `npm run build` produit le dossier `out/`,
+  // qui se publie tel quel sur Netlify (ou tout autre hébergeur).
+  output: "export",
+  // Pages en dossiers (/pierres/index.html) : adresses propres sur tous les hébergeurs.
+  trailingSlash: true,
   images: {
-    // Les photos produits sont hébergées sur le site pro artandstone.fr.
-    remotePatterns: [
-      { protocol: "https", hostname: "artandstone.fr", pathname: "/images/**" },
-      { protocol: "https", hostname: "www.artandstone.fr", pathname: "/images/**" },
-    ],
-    qualities: [75],
-    // Les images changent rarement : on les garde 31 jours en cache.
-    minimumCacheTTL: 2678400,
-  },
-  poweredByHeader: false,
-  async headers() {
-    return [
-      {
-        source: "/(.*)",
-        headers: [
-          { key: "X-Content-Type-Options", value: "nosniff" },
-          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
-          { key: "X-Frame-Options", value: "SAMEORIGIN" },
-        ],
-      },
-    ];
+    // Les photos viennent directement de artandstone.fr, sans redimensionnement serveur.
+    unoptimized: true,
   },
   turbopack: {
     rules: {
