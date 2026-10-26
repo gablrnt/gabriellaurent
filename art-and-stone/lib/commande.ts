@@ -1,7 +1,7 @@
 /**
- * Logique de commande partagée entre le navigateur et le serveur :
- * lignes de panier, calcul des totaux et des frais de livraison.
- * Le serveur recalcule toujours les prix à partir de data/produits.ts.
+ * Logique de commande : lignes de panier, calcul des totaux et des frais de
+ * livraison, récapitulatif envoyé à la boutique.
+ * Les prix sont toujours recalculés à partir de data/produits.ts.
  */
 import { KIT_ECHANTILLONS, PROFILS_NEZ, UNITES, type ProfilNez, type Unite } from "@/data/produits";
 import {
@@ -17,7 +17,7 @@ import {
   type ZoneLivraison,
 } from "@/data/livraison";
 import { getProduit } from "@/lib/catalogue";
-import { arrondiCentime } from "@/lib/format";
+import { arrondiCentime, formatNombre, formatPrix } from "@/lib/format";
 
 /* ---------- Lignes de panier (ce qui est stocké dans le navigateur) ---------- */
 
@@ -219,4 +219,68 @@ export function calculerFraisLivraison(panier: PanierResolu, zone: ZoneLivraison
 
 export function libelleMode(mode: ModeLivraison): string {
   return MODES[mode].label;
+}
+
+/* ---------- Récapitulatif texte (formulaire de commande) ---------- */
+
+export type InfosCommande = {
+  reference: string;
+  coordonnees: { prenom: string; nom: string; email: string; telephone: string };
+  adresse: { adresse: string; complement: string; codePostal: string; ville: string; zone: ZoneLivraison; pays: string };
+  mode: ModeLivraison;
+  message: string;
+};
+
+export function libelleFraisTexte(frais: FraisLivraison): string {
+  return frais.montant === null ? frais.libelle : formatPrix(frais.montant);
+}
+
+/** Liste des articles, une ligne par article, pour l'e-mail reçu par la boutique */
+export function resumeArticles(panier: PanierResolu): string {
+  return panier.lignes
+    .map((l) => {
+      const details = l.details.length > 0 ? `\n    ${l.details.join("\n    ")}` : "";
+      const provisoire = l.prixProvisoire ? " (prix indicatif)" : "";
+      return `- ${l.nom} : ${formatNombre(l.quantite)} ${l.libelleUnite} × ${formatPrix(l.prixUnitaire)} = ${formatPrix(l.total)}${provisoire}${details}`;
+    })
+    .join("\n");
+}
+
+/** Récapitulatif complet de la commande */
+export function resumeCommande(infos: InfosCommande, panier: PanierResolu, frais: FraisLivraison): string {
+  const { coordonnees: c, adresse: a } = infos;
+  const total = panier.sousTotal + (frais.montant ?? 0);
+  const poids =
+    panier.poidsTotalKg === null
+      ? "inconnu (au moins un poids non renseigné)"
+      : `${formatNombre(panier.poidsTotalKg)} kg`;
+  return [
+    `Référence : ${infos.reference}`,
+    "",
+    "CLIENT",
+    `${c.prenom} ${c.nom} — ${c.email} — ${c.telephone}`,
+    "",
+    "ADRESSE DE LIVRAISON",
+    a.adresse,
+    ...(a.complement ? [a.complement] : []),
+    `${a.codePostal} ${a.ville}`,
+    `${ZONES[a.zone].label}${a.zone === "europe" ? ` — ${a.pays}` : ""}`,
+    "",
+    "ARTICLES",
+    resumeArticles(panier),
+    "",
+    `Sous-total TTC : ${formatPrix(panier.sousTotal)}`,
+    `Mode de livraison : ${MODES[infos.mode].label}`,
+    `Frais de livraison : ${libelleFraisTexte(frais)}`,
+    `Total TTC${frais.montant === null ? " (hors livraison)" : ""} : ${formatPrix(total)}`,
+    `Poids estimé : ${poids}`,
+    ...(infos.message ? ["", "PRÉCISIONS DU CLIENT", infos.message] : []),
+  ].join("\n");
+}
+
+/** Référence courte de commande, ex. AS-261026-K4P2 */
+export function nouvelleReference(): string {
+  const date = new Date().toISOString().slice(2, 10).replace(/-/g, "");
+  const aleatoire = Math.random().toString(36).slice(2, 6).toUpperCase();
+  return `AS-${date}-${aleatoire}`;
 }

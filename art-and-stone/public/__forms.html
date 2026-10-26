@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <title>Formulaires ART &amp; STONE</title>
+  </head>
+  <body>
+    <!--
+      Squelettes des formulaires pour Netlify Forms (ne pas supprimer).
+      Les noms des champs doivent correspondre exactement à ceux envoyés par
+      lib/formulaires.ts (pages Contact et Commande).
+    -->
+    <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="contact" />
+      <input type="hidden" name="subject" />
+      <input type="text" name="nom" />
+      <input type="email" name="email" />
+      <input type="tel" name="telephone" />
+      <input type="text" name="sujet" />
+      <textarea name="message"></textarea>
+      <input type="text" name="bot-field" />
+    </form>
+
+    <form name="commande" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="commande" />
+      <input type="hidden" name="subject" />
+      <input type="text" name="reference" />
+      <textarea name="recapitulatif"></textarea>
+      <input type="text" name="prenom" />
+      <input type="text" name="nom" />
+      <input type="email" name="email" />
+      <input type="tel" name="telephone" />
+      <input type="text" name="adresse" />
+      <input type="text" name="complement" />
+      <input type="text" name="codePostal" />
+      <input type="text" name="ville" />
+      <input type="text" name="zone" />
+      <input type="text" name="pays" />
+      <input type="text" name="livraison" />
+      <input type="text" name="fraisLivraison" />
+      <input type="text" name="total" />
+      <textarea name="articles"></textarea>
+      <textarea name="message"></textarea>
+      <input type="text" name="bot-field" />
+    </form>
+  </body>
+</html>

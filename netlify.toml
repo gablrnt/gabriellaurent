@@ -1,5 +1,10 @@
-# Déploiement Netlify : le site se trouve dans le dossier art-and-stone/
+# Déploiement Netlify : le site se trouve dans le dossier art-and-stone/.
+# C'est un site statique : Netlify publie le dossier out/ produit par le build.
 [build]
   base = "art-and-stone"
   command = "npm run build"
-  publish = ".next"
+  publish = "out"
+
+[build.environment]
+  # Site exporté en statique : le module serveur Next.js de Netlify n'est pas utilisé.
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
